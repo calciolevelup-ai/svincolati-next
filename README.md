@@ -1,36 +1,125 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SVINCOLATI — Next.js Rebuild
 
-## Getting Started
+Ricostruzione della piattaforma con **Next.js 16 + TypeScript + Tailwind** e database normalizato su **Supabase**.
 
-First, run the development server:
+## ✅ Completato
 
+### Core Setup
+- ✅ Progetto Next.js con TypeScript, Tailwind, ESLint
+- ✅ Supabase configurato (client/server)
+- ✅ Middleware autenticazione
+- ✅ Layout globale con CSS custom properties
+
+### Autenticazione
+- ✅ Pagina Login
+- ✅ Pagina Register con validazione
+- ✅ Hook `useAuth()` per gestire profilo
+- ✅ Logout
+
+### Database
+- ✅ Schema SQL con 14 tabelle normalizzate
+- ✅ RLS policies (Row Level Security)
+- ✅ Tabelle: profiles, player_profiles, club_profiles, ads, candidatures, threads, messages, transfers, favorites, player_views, reports, referenze, career_history, invite_codes
+
+### API Routes
+- ✅ GET `/api/auth/me` — profilo corrente
+- ✅ GET `/api/players` — cerca giocatori con filtri
+
+### Componenti UI
+- ✅ Componente Button (variants: primary, ghost, danger, done)
+- ✅ Utility functions (cn, scfg, initials, relTime, calcAge, etc)
+
+### Dashboard Base
+- ✅ `/dashboard` — home page
+
+## 📋 Da Implementare
+
+### Pagine Dashboard
+- [ ] `/dashboard/cerca` — Search con filtri (tab Giocatori/Staff/Squadre)
+- [ ] `/dashboard/profilo` — Edit profilo giocatore/club
+- [ ] `/dashboard/candidature` — Lista candidature (inbound/outbound)
+- [ ] `/dashboard/messaggi` — Chat realtime
+- [ ] `/dashboard/trasferimenti` — Gestire trasferimenti
+- [ ] `/dashboard/admin` — Panel admin (gestione utenti, inviti, etc)
+
+### API Routes Complete
+- [ ] POST `/api/players` — crea/aggiorna profilo
+- [ ] GET/POST `/api/ads` — annunci
+- [ ] GET/POST `/api/candidatures` — candidature
+- [ ] GET/POST `/api/threads` — conversazioni
+- [ ] POST `/api/messages` — messaggi (realtime)
+- [ ] GET/POST `/api/transfers` — trasferimenti
+- [ ] GET/POST `/api/favorites` — preferiti
+- [ ] GET/POST `/api/referenze` — referenze
+- [ ] DELETE `/api/auth/logout` — logout
+
+### Componenti
+- [ ] Navbar/Sidebar con nav dinamica per sport
+- [ ] Player Card (con stella preferiti)
+- [ ] Club Card
+- [ ] Ad Card
+- [ ] Candidature row (con badge inbound/outbound)
+- [ ] Message bubble
+- [ ] Modal dettagli giocatore
+- [ ] Search filters panel mobile
+- [ ] Onboarding modal
+
+## 🚀 Quick Start
+
+### 1. Database
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Apri Supabase → SQL Editor → New Query
+# Incolla supabase/schema.sql
+# Clicca Run
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Dev Server
+```bash
+npm run dev
+# http://localhost:3000
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Login
+- Email: `calcio.levelup@gmail.com`
+- Password: `Lega2026`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Oppure registrati con codice invito: `LEGA2026`
 
-## Learn More
+## 📁 File Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+├── app/
+│   ├── auth/login/page.tsx           # Login form
+│   ├── auth/register/page.tsx        # Register form
+│   ├── dashboard/page.tsx            # Home dashboard
+│   ├── api/                          # API routes
+│   ├── layout.tsx                    # Root layout
+│   └── globals.css                   # Design tokens
+├── components/
+│   ├── ui/Button.tsx                 # Button base
+│   └── ...                           # (da fare)
+├── hooks/
+│   └── useAuth.ts                    # Hook auth
+├── lib/
+│   ├── supabase/                     # Client/Server
+│   ├── types.ts                      # TypeScript types
+│   ├── constants.ts                  # SPORTS, REGIONI, etc
+│   └── utils.ts                      # Helpers
+└── middleware.ts                     # Auth middleware
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🎨 Design System
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+CSS custom properties in `globals.css`:
+- `--acid: #41c285` (accent verde)
+- `--bg: #0b0d0a` (background scuro)
+- `--card: #1c2118` (card)
+- `--danger: #ff5a3c` (rosso)
+- `--blue: #4cc2ff` (blu)
 
-## Deploy on Vercel
+## 📞 Info
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Schema SQL da eseguire: `supabase/schema.sql`
+- Credenziali Supabase in `.env.local` (già configurate)
+- Design token uguali al progetto vecchio per continuità visiva

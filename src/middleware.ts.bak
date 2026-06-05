@@ -1,0 +1,22 @@
+import { type NextRequest, NextResponse } from 'next/server'
+
+export function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl
+  const token = request.cookies.get('sb-auth-token')?.value
+
+  // Reindirizza non autenticati fuori da /dashboard
+  if (!token && pathname.startsWith('/dashboard')) {
+    return NextResponse.redirect(new URL('/auth/login', request.url))
+  }
+
+  // Reindirizza autenticati fuori da /auth
+  if (token && (pathname === '/auth/login' || pathname === '/auth/register')) {
+    return NextResponse.redirect(new URL('/dashboard', request.url))
+  }
+
+  return NextResponse.next()
+}
+
+export const config = {
+  matcher: ['/dashboard/:path*', '/auth/:path*'],
+}
