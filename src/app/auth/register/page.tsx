@@ -47,14 +47,15 @@ export default function RegisterPage() {
   }
 
   const sportList = Object.entries(SPORTS).map(([key, cfg]) => ({key, ...cfg}))
+  const currentSportColor = sport ? SPORTS[sport as keyof typeof SPORTS]?.color || 'var(--acid)' : 'var(--acid)'
 
   return (
-    <div style={{minHeight:'100vh',background:'var(--bg)',display:'flex',alignItems:'center',justifyContent:'center',padding:'20px'}}>
-      <div style={{maxWidth:500}}>
-        <div style={{textAlign:'center',marginBottom:48}}>
+    <div style={{minHeight:'100vh',background:'var(--bg)',display:'flex',alignItems:'center',justifyContent:'center',padding:'20px',transition:'.4s ease-in-out'}}>
+      <div style={{maxWidth:500,width:'100%'}}>
+        <div style={{textAlign:'center',marginBottom:48,transition:'.4s ease-in-out'}}>
           <div style={{fontSize:48,marginBottom:16}}>⚽</div>
-          <h1 style={{fontFamily:'Anton',fontSize:28,color:'var(--text)',letterSpacing:'.06em'}}>
-            SV<span style={{color:'var(--acid)'}}>INCOLA</span>TI
+          <h1 style={{fontFamily:'Anton',fontSize:28,color:'var(--text)',letterSpacing:'.06em',transition:'.4s ease-in-out'}}>
+            SV<span style={{color:currentSportColor,transition:'.4s ease-in-out'}}>INCOLA</span>TI
           </h1>
         </div>
 
