@@ -147,6 +147,7 @@ export interface Favorite {
 export interface SportConfig {
   nome: string
   icon: string
+  color: string
   foot: boolean
   score: string
   scoreOne: string
