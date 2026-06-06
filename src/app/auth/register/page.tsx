@@ -54,8 +54,8 @@ export default function RegisterPage() {
       <div style={{maxWidth:500,width:'100%'}}>
         <div style={{textAlign:'center',marginBottom:48,transition:'.4s ease-in-out'}}>
           <div style={{fontSize:48,marginBottom:16}}>⚽</div>
-          <h1 style={{fontFamily:'Anton',fontSize:28,color:'var(--text)',letterSpacing:'.06em',transition:'.4s ease-in-out'}}>
-            SV<span style={{color:currentSportColor,transition:'.4s ease-in-out'}}>INCOLA</span>TI
+          <h1 style={{fontFamily:'Anton',fontSize:28,letterSpacing:'.06em',transition:'.4s ease-in-out'}}>
+            <span style={{color:currentSportColor,transition:'.4s ease-in-out'}}>SVINCOLATI</span>
           </h1>
         </div>
 
