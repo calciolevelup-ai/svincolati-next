@@ -49,7 +49,7 @@ export default function LoginPage() {
             {/* LEFT: Title */}
             <div>
               <h1 style={{fontFamily:'Anton',fontWeight:400,fontSize:'clamp(44px,7vw,86px)',lineHeight:0.92,letterSpacing:'-.01em',textTransform:'uppercase',transition:'.4s ease-in-out'}}>
-                <span style={{color:'var(--acid)'}}>Il mercato del</span>
+                <span style={{color:'var(--text)'}}>Il mercato del</span>
                 <br/>
                 <span style={{color:'var(--acid)'}}>calcio dilettantistico</span>
               </h1>

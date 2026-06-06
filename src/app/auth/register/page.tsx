@@ -47,8 +47,9 @@ export default function RegisterPage() {
   }
 
   const sportList = Object.entries(SPORTS).map(([key, cfg]) => ({key, ...cfg}))
-  const currentSport = sport ? (SPORTS[sport as keyof typeof SPORTS]?.nome || 'calcio') : 'calcio'
+  const currentSport = sport ? (SPORTS[sport as keyof typeof SPORTS]?.nome || 'calcio').toLowerCase() : 'calcio'
   const currentSportColor = sport ? SPORTS[sport as keyof typeof SPORTS]?.color || 'var(--acid)' : 'var(--acid)'
+  const article = currentSport === 'pallavolo' ? 'della' : 'del'
 
   return (
     <div style={{minHeight:'100vh',background:'var(--bg)',position:'relative'}}>
@@ -62,7 +63,7 @@ export default function RegisterPage() {
             {/* LEFT: Title */}
             <div>
               <h1 style={{fontFamily:'Anton',fontWeight:400,fontSize:'clamp(44px,7vw,86px)',lineHeight:0.92,letterSpacing:'-.01em',textTransform:'uppercase',transition:'.4s ease-in-out'}}>
-                <span style={{color:currentSportColor,transition:'.4s ease-in-out'}}>Il mercato </span>
+                <span style={{color:'var(--text)'}}>Il mercato {sport ? article + ' ' : ''}</span>
                 {sport && <><span style={{color:currentSportColor,transition:'.4s ease-in-out'}}>{currentSport}</span><br/></>}
                 <span style={{color:'var(--acid)'}}>dilettantistico</span>
               </h1>

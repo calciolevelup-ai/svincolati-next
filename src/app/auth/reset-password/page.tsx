@@ -53,9 +53,9 @@ export default function ResetPasswordPage() {
             {/* LEFT: Title */}
             <div>
               <h1 style={{fontFamily:'Anton',fontWeight:400,fontSize:'clamp(44px,7vw,86px)',lineHeight:0.92,letterSpacing:'-.01em',textTransform:'uppercase'}}>
-                <span style={{color:'var(--acid)'}}>Crea una nuova</span>
+                <span style={{color:'var(--text)'}}>Crea una</span>
                 <br/>
-                <span style={{color:'var(--acid)'}}>password</span>
+                <span style={{color:'var(--acid)'}}>nuova password</span>
               </h1>
               <p style={{marginTop:'22px',fontSize:'17px',color:'var(--muted)',maxWidth:'46ch',lineHeight:1.6}}>
                 Inserisci la tua nuova password per completare il reset.

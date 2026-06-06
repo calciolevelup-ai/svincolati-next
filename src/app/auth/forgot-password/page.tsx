@@ -41,7 +41,7 @@ export default function ForgotPasswordPage() {
             {/* LEFT: Title */}
             <div>
               <h1 style={{fontFamily:'Anton',fontWeight:400,fontSize:'clamp(44px,7vw,86px)',lineHeight:0.92,letterSpacing:'-.01em',textTransform:'uppercase'}}>
-                <span style={{color:'var(--acid)'}}>Recupera il tuo</span>
+                <span style={{color:'var(--text)'}}>Recupera il tuo</span>
                 <br/>
                 <span style={{color:'var(--acid)'}}>account</span>
               </h1>
