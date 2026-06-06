@@ -5,6 +5,8 @@ import Button from '@/components/ui/Button'
 import { useAuth } from '@/hooks/useAuth'
 import { createClient } from '@/lib/supabase/client'
 import { scfg, calcAge } from '@/lib/utils'
+import { getVideoEmbedUrl } from '@/lib/video'
+import { uploadPlayerPhoto } from '@/lib/photos'
 
 export default function CVEditPage() {
   const { profile, playerProfile } = useAuth()
@@ -32,6 +34,8 @@ export default function CVEditPage() {
   const [newEntry, setNewEntry] = useState({ stagione: '', squadra: '', categoria: '', presenze: '', reti: '' })
   const [saving, setSaving] = useState(false)
   const [dob, setDob] = useState('')
+  const [photoPreview, setPhotoPreview] = useState<string>('')
+  const [uploadingPhoto, setUploadingPhoto] = useState(false)
 
   useEffect(() => {
     if (playerProfile) {
@@ -76,6 +80,31 @@ export default function CVEditPage() {
       console.error(err)
     }
     setSaving(false)
+  }
+
+  const handlePhotoChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file || !profile?.id) return
+
+    setUploadingPhoto(true)
+    try {
+      const reader = new FileReader()
+      reader.onload = (event) => {
+        setPhotoPreview(event.target?.result as string)
+      }
+      reader.readAsDataURL(file)
+
+      const photoUrl = await uploadPlayerPhoto(file, profile.id)
+      if (photoUrl) {
+        setFormData({ ...formData, photo: photoUrl })
+        alert('Foto caricata con successo!')
+      }
+    } catch (err) {
+      console.error(err)
+      alert('Errore nel caricamento della foto')
+    } finally {
+      setUploadingPhoto(false)
+    }
   }
 
   const addCareerEntry = async () => {
@@ -180,6 +209,29 @@ export default function CVEditPage() {
               <input type="text" value={formData.squadra} onChange={e => setFormData({...formData, squadra: e.target.value})} className="search-input" />
             </div>
 
+            <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:12}}>
+              <div>
+                <label>Foto profilo</label>
+                <input type="file" accept="image/*" onChange={handlePhotoChange} disabled={uploadingPhoto} className="search-input" style={{cursor:'pointer'}} />
+                {(photoPreview || formData.photo) && (
+                  <img src={photoPreview || formData.photo} alt="Preview" style={{marginTop:10,width:'100%',height:150,objectFit:'cover',borderRadius:10}} />
+                )}
+              </div>
+              <div>
+                <label>Disponibilità</label>
+                <select value={formData.disponibile ? 'si' : 'no'} onChange={e => setFormData({...formData, disponibile: e.target.value === 'si'})} className="search-select">
+                  <option value="si">Disponibile</option>
+                  <option value="no">Non disponibile</option>
+                </select>
+                {!formData.disponibile && (
+                  <div style={{marginTop:8}}>
+                    <label style={{fontSize:12}}>Disponibile da</label>
+                    <input type="date" value={formData.disponibile_da} onChange={e => setFormData({...formData, disponibile_da: e.target.value})} className="search-input" style={{fontSize:12}} />
+                  </div>
+                )}
+              </div>
+            </div>
+
             <div>
               <label>Bio/Descrizione *</label>
               <textarea value={formData.bio} onChange={e => setFormData({...formData, bio: e.target.value})} className="search-input" style={{minHeight:100,resize:'none'}} />
@@ -189,6 +241,16 @@ export default function CVEditPage() {
               <div>
                 <label>Link video</label>
                 <input type="text" placeholder="es: youtube.com/..." value={formData.video} onChange={e => setFormData({...formData, video: e.target.value})} className="search-input" />
+                {formData.video && getVideoEmbedUrl(formData.video) && (
+                  <div style={{marginTop:10,borderRadius:10,overflow:'hidden',position:'relative',paddingBottom:'56.25%',height:0}}>
+                    <iframe
+                      src={getVideoEmbedUrl(formData.video) || ''}
+                      style={{position:'absolute',top:0,left:0,width:'100%',height:'100%',border:'none'}}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  </div>
+                )}
               </div>
               <div>
                 <label>Contatto privato</label>

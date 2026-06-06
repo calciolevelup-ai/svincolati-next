@@ -65,6 +65,16 @@ export default function ClubAdsPage() {
     setAds(ads.filter(a => a.id !== id))
   }
 
+  const renewAd = async (id: string) => {
+    const currentAd = ads.find(a => a.id === id)
+    if (!currentAd) return
+
+    const newExpiresAt = new Date(Date.now() + 30 * 24 * 3600 * 1000).toISOString()
+    await supabase.from('ads').update({ expires_at: newExpiresAt }).eq('id', id)
+
+    setAds(ads.map(a => a.id === id ? { ...a, expires_at: newExpiresAt } : a))
+  }
+
   if (profile?.role !== 'club') {
     return (
       <DashboardLayout>
@@ -156,7 +166,12 @@ export default function ClubAdsPage() {
                       </div>
                     </div>
                     <div style={{fontSize:13,color:'var(--muted)',marginBottom:10,lineHeight:1.4}}>{ad.descr}</div>
-                    <button onClick={() => deleteAd(ad.id)} style={{color:'var(--danger)',background:'none',border:'none',cursor:'pointer',fontSize:12,fontWeight:600}}>🗑 Elimina</button>
+                    <div style={{display:'flex',gap:8}}>
+                      {daysLeft <= 7 && (
+                        <button onClick={() => renewAd(ad.id)} style={{color:'var(--acid)',background:'none',border:'none',cursor:'pointer',fontSize:12,fontWeight:600}}>🔄 Rinnova</button>
+                      )}
+                      <button onClick={() => deleteAd(ad.id)} style={{color:'var(--danger)',background:'none',border:'none',cursor:'pointer',fontSize:12,fontWeight:600}}>🗑 Elimina</button>
+                    </div>
                   </div>
                 )
               })}

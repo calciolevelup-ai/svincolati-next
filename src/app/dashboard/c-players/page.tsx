@@ -121,8 +121,8 @@ export default function ClubPlayersPage() {
 
                 {/* Player Info */}
                 <div style={{display:'flex',gap:10,alignItems:'flex-start',marginBottom:10}}>
-                  <div style={{width:44,height:44,borderRadius:10,background:'linear-gradient(135deg, rgba(65, 194, 133, 0.2), rgba(76, 194, 255, 0.1))',display:'flex',alignItems:'center',justifyContent:'center',fontSize:18,fontFamily:'Anton',flexShrink:0}}>
-                    {initials(p.nome)}
+                  <div style={{width:44,height:44,borderRadius:10,background:p.photo ? undefined : 'linear-gradient(135deg, rgba(65, 194, 133, 0.2), rgba(76, 194, 255, 0.1))',display:'flex',alignItems:'center',justifyContent:'center',fontSize:18,fontFamily:'Anton',flexShrink:0,overflow:'hidden',backgroundImage:p.photo ? `url(${p.photo})` : undefined,backgroundSize:'cover',backgroundPosition:'center'}}>
+                    {!p.photo && initials(p.nome)}
                   </div>
                   <div style={{flex:1}}>
                     <div style={{fontSize:13,fontWeight:'bold',color:'var(--text)',display:'flex',alignItems:'center',gap:6}}>
