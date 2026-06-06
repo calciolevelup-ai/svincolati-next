@@ -1,125 +1,114 @@
-# SVINCOLATI — Next.js Rebuild
+# SVINCOLATI — Marketplace Sportivo
 
-Ricostruzione della piattaforma con **Next.js 16 + TypeScript + Tailwind** e database normalizato su **Supabase**.
+Piattaforma web moderna per connettere giocatori svincolati e società sportive dilettantistiche.
 
-## ✅ Completato
+## 🚀 Tech Stack
 
-### Core Setup
-- ✅ Progetto Next.js con TypeScript, Tailwind, ESLint
-- ✅ Supabase configurato (client/server)
-- ✅ Middleware autenticazione
-- ✅ Layout globale con CSS custom properties
+- **Frontend**: Next.js 16 + TypeScript + Tailwind CSS
+- **Backend**: Supabase (PostgreSQL + Auth)
+- **Real-time**: Supabase Subscriptions
+- **Email**: EmailJS
+- **Storage**: Supabase Storage (foto profili)
 
-### Autenticazione
-- ✅ Pagina Login
-- ✅ Pagina Register con validazione
-- ✅ Hook `useAuth()` per gestire profilo
-- ✅ Logout
+## ✨ Features
 
-### Database
-- ✅ Schema SQL con 14 tabelle normalizzate
-- ✅ RLS policies (Row Level Security)
-- ✅ Tabelle: profiles, player_profiles, club_profiles, ads, candidatures, threads, messages, transfers, favorites, player_views, reports, referenze, career_history, invite_codes
+### 🎯 Core Features
+- ✅ Autenticazione con email/password
+- ✅ Profili giocatori e società
+- ✅ Sistema di candidature (player → club)
+- ✅ Provini (trials) - club → player
+- ✅ Messaging in tempo reale
+- ✅ Sistema di favoriti (⭐)
+- ✅ Attività feed
 
-### API Routes
-- ✅ GET `/api/auth/me` — profilo corrente
-- ✅ GET `/api/players` — cerca giocatori con filtri
+### 🎨 Personalizzazione
+- ✅ Sport-specific color themes (5 sport)
+- ✅ Dark/Light theme toggle
+- ✅ Verified badge per giocatori certificati
+- ✅ Video embed (YouTube/Vimeo)
 
-### Componenti UI
-- ✅ Componente Button (variants: primary, ghost, danger, done)
-- ✅ Utility functions (cn, scfg, initials, relTime, calcAge, etc)
+### 🔍 Ricerca & Filtri
+- ✅ Ricerca avanzata con filtri dinamici
+- ✅ Filtri: ruolo, piede, categoria, età, altezza, regione, provincia
+- ✅ Matching algorithm per candidature
 
-### Dashboard Base
-- ✅ `/dashboard` — home page
+### 📱 UX/UI
+- ✅ Responsive design (mobile-first)
+- ✅ Onboarding modals
+- ✅ Cookie consent banner
+- ✅ Loading states & animations
+- ✅ Toast notifications
 
-## 📋 Da Implementare
-
-### Pagine Dashboard
-- [ ] `/dashboard/cerca` — Search con filtri (tab Giocatori/Staff/Squadre)
-- [ ] `/dashboard/profilo` — Edit profilo giocatore/club
-- [ ] `/dashboard/candidature` — Lista candidature (inbound/outbound)
-- [ ] `/dashboard/messaggi` — Chat realtime
-- [ ] `/dashboard/trasferimenti` — Gestire trasferimenti
-- [ ] `/dashboard/admin` — Panel admin (gestione utenti, inviti, etc)
-
-### API Routes Complete
-- [ ] POST `/api/players` — crea/aggiorna profilo
-- [ ] GET/POST `/api/ads` — annunci
-- [ ] GET/POST `/api/candidatures` — candidature
-- [ ] GET/POST `/api/threads` — conversazioni
-- [ ] POST `/api/messages` — messaggi (realtime)
-- [ ] GET/POST `/api/transfers` — trasferimenti
-- [ ] GET/POST `/api/favorites` — preferiti
-- [ ] GET/POST `/api/referenze` — referenze
-- [ ] DELETE `/api/auth/logout` — logout
-
-### Componenti
-- [ ] Navbar/Sidebar con nav dinamica per sport
-- [ ] Player Card (con stella preferiti)
-- [ ] Club Card
-- [ ] Ad Card
-- [ ] Candidature row (con badge inbound/outbound)
-- [ ] Message bubble
-- [ ] Modal dettagli giocatore
-- [ ] Search filters panel mobile
-- [ ] Onboarding modal
+### 🛠️ Admin
+- ✅ Admin panel con statistiche
+- ✅ Gestione codici invito
+- ✅ User management
 
 ## 🚀 Quick Start
 
-### 1. Database
-```bash
-# Apri Supabase → SQL Editor → New Query
-# Incolla supabase/schema.sql
-# Clicca Run
-```
+### Prerequisites
+- Node.js 18+
+- Supabase account
 
-### 2. Dev Server
+### Installation
+
 ```bash
+git clone https://github.com/calciolevelup-ai/svincolati-next.git
+cd svincolati-next
+npm install
+
+# Setup environment
+cp .env.example .env.local
+
+# Run dev server
 npm run dev
-# http://localhost:3000
 ```
 
-### 3. Login
-- Email: `calcio.levelup@gmail.com`
-- Password: `Lega2026`
+Visita `http://localhost:3000`
 
-Oppure registrati con codice invito: `LEGA2026`
+## 📊 Fasi Implementate (9/10)
 
-## 📁 File Structure
+1. ✅ Sport color themes + verified badge
+2. ✅ Advanced search filters
+3. ✅ Career history + video embed
+4. ✅ Ad expiry + renewal
+5. ✅ Referenze/reviews system
+6. ✅ Photo upload
+7. ✅ Theme toggle + cookie consent
+8. ✅ Onboarding modals
+9. ✅ Admin panel improvements
 
-```
-src/
-├── app/
-│   ├── auth/login/page.tsx           # Login form
-│   ├── auth/register/page.tsx        # Register form
-│   ├── dashboard/page.tsx            # Home dashboard
-│   ├── api/                          # API routes
-│   ├── layout.tsx                    # Root layout
-│   └── globals.css                   # Design tokens
-├── components/
-│   ├── ui/Button.tsx                 # Button base
-│   └── ...                           # (da fare)
-├── hooks/
-│   └── useAuth.ts                    # Hook auth
-├── lib/
-│   ├── supabase/                     # Client/Server
-│   ├── types.ts                      # TypeScript types
-│   ├── constants.ts                  # SPORTS, REGIONI, etc
-│   └── utils.ts                      # Helpers
-└── middleware.ts                     # Auth middleware
-```
+## 📈 Pages (38/38)
+
+- 4 Auth pages (login, register, password reset)
+- 17 Dashboard pages (player/club/staff)
+- 4 Public pages (profile, marketplace, privacy, onboarding)
+- Admin panel
 
 ## 🎨 Design System
 
-CSS custom properties in `globals.css`:
-- `--acid: #41c285` (accent verde)
-- `--bg: #0b0d0a` (background scuro)
-- `--card: #1c2118` (card)
-- `--danger: #ff5a3c` (rosso)
-- `--blue: #4cc2ff` (blu)
+**Sport Color Themes:**
+- calcio (green) ⚽
+- calcio5 (blue) ⚽
+- pallavolo (purple) 🏐
+- rugby (yellow) 🏈
+- basket (orange) 🏀
 
-## 📞 Info
+## 🔐 Security
 
-- Schema SQL da eseguire: `supabase/schema.sql`
-- Credenziali Supabase in `.env.local` (già configurate)
-- Design token uguali al progetto vecchio per continuità visiva
+- Supabase RLS policies
+- JWT authentication
+- Protected routes
+- Input validation
+
+## 📄 License
+
+MIT
+
+## 👨‍💻 Author
+
+Developed by Claude Code + User
+
+---
+
+GitHub: [calciolevelup-ai/svincolati-next](https://github.com/calciolevelup-ai/svincolati-next)
