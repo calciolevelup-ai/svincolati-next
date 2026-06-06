@@ -47,31 +47,45 @@ export default function RegisterPage() {
   }
 
   const sportList = Object.entries(SPORTS).map(([key, cfg]) => ({key, ...cfg}))
+  const currentSport = sport ? (SPORTS[sport as keyof typeof SPORTS]?.nome || 'calcio') : 'calcio'
   const currentSportColor = sport ? SPORTS[sport as keyof typeof SPORTS]?.color || 'var(--acid)' : 'var(--acid)'
 
   return (
-    <div style={{minHeight:'100vh',background:'var(--bg)',display:'flex',alignItems:'center',justifyContent:'center',padding:'20px',transition:'.4s ease-in-out'}}>
-      <div style={{maxWidth:500,width:'100%'}}>
-        <div style={{textAlign:'center',marginBottom:48,transition:'.4s ease-in-out'}}>
-          <div style={{fontSize:48,marginBottom:16}}>⚽</div>
-          <h1 style={{fontFamily:'Anton',fontSize:28,letterSpacing:'.06em',transition:'.4s ease-in-out'}}>
-            <span style={{color:currentSportColor,transition:'.4s ease-in-out'}}>SVINCOLATI</span>
-          </h1>
-        </div>
+    <div style={{minHeight:'100vh',background:'var(--bg)',position:'relative'}}>
+      {/* Stripes background */}
+      <div style={{position:'absolute',right:'-60px',top:'-30px',width:'520px',height:'520px',zIndex:0,opacity:0.5,background:'repeating-linear-gradient(115deg, transparent 0 38px, rgba(65,194,133,.06) 38px 40px)',transform:'rotate(8deg)',pointerEvents:'none'}}></div>
 
-        <div style={{background:'var(--card)',border:'1px solid var(--line)',borderRadius:18,padding:30}}>
+      {/* Main content */}
+      <div style={{position:'relative',zIndex:3,padding:'48px 0 80px'}}>
+        <div style={{maxWidth:'1180px',margin:'0 auto',padding:'0 24px'}}>
+          <div style={{display:'grid',gridTemplateColumns:'1.05fr .95fr',gap:'54px',alignItems:'flex-start'}}>
+            {/* LEFT: Title */}
+            <div>
+              <h1 style={{fontFamily:'Anton',fontWeight:400,fontSize:'clamp(44px,7vw,86px)',lineHeight:0.92,letterSpacing:'-.01em',textTransform:'uppercase',transition:'.4s ease-in-out'}}>
+                <span style={{color:currentSportColor,transition:'.4s ease-in-out'}}>Il mercato </span>
+                {sport && <><span style={{color:currentSportColor,transition:'.4s ease-in-out'}}>{currentSport}</span><br/></>}
+                <span style={{color:'var(--acid)'}}>dilettantistico</span>
+              </h1>
+              <p style={{marginTop:'22px',fontSize:'17px',color:'var(--muted)',maxWidth:'46ch',lineHeight:1.6}}>
+                Una community chiusa che mette in contatto giocatori svincolati e società. Niente bacheche pubbliche aperte a tutti: si entra solo con un codice invito.
+              </p>
+            </div>
+
+            {/* RIGHT: Form */}
+            <div style={{background:'var(--card)',border:'1px solid var(--line)',borderRadius:18,padding:30,animation:'rise .5s cubic-bezier(.2,.7,.2,1) both',width:'100%'}}>
           {/* Step 1: Sport */}
           {step === 'sport' && (
             <div>
               <h2 style={{fontSize:16,fontWeight:'bold',color:'var(--text)',marginBottom:24,textAlign:'center'}}>Scegli lo sport</h2>
-              <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit, minmax(100px, 1fr))',gap:8,marginBottom:24}}>
+              <div style={{display:'grid',gridTemplateColumns:'repeat(5,1fr)',gap:8,marginBottom:24}}>
                 {sportList.map(s => (
                   <button
                     key={s.key}
                     onClick={() => {setSport(s.key); setStep('role')}}
-                    style={{border:sport===s.key?'2px solid var(--acid)':'2px solid var(--line)',background:sport===s.key?'rgba(65,194,133,.12)':'var(--bg-2)',color:'var(--text)',padding:16,borderRadius:10,cursor:'pointer',transition:'.24s',fontSize:14,fontWeight:'bold'}}
+                    style={{border:sport===s.key?'2px solid var(--acid)':'2px solid var(--line)',background:sport===s.key?'rgba(65,194,133,.12)':'var(--bg-2)',color:'var(--text)',padding:12,borderRadius:10,cursor:'pointer',transition:'.24s',fontSize:12,fontWeight:'bold',height:80,display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',position:'relative',overflow:'hidden'}}
                   >
-                    {s.icon} {s.nome}
+                    <div style={{fontSize:48,position:'absolute',right:8,top:'50%',transform:'translateY(-50%)',opacity:0.5,zIndex:1}}>{s.icon}</div>
+                    <div style={{writingMode:'vertical-rl',textOrientation:'mixed',transform:'rotate(180deg)',fontSize:12,letterSpacing:'.5px',zIndex:2,color:'var(--text)',lineHeight:1.1,marginRight:6}}>{s.nome}</div>
                   </button>
                 ))}
               </div>
@@ -82,7 +96,7 @@ export default function RegisterPage() {
           {step === 'role' && (
             <div>
               <h2 style={{fontSize:16,fontWeight:'bold',color:'var(--text)',marginBottom:24,textAlign:'center'}}>Chi sei?</h2>
-              <div style={{display:'grid',gap:10,marginBottom:24}}>
+              <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:10,marginBottom:24}}>
                 {[
                   {value:'player',title:'Giocatore',desc:'Cerco squadra'},
                   {value:'staff',title:'Staff',desc:'Allenatore/Preparatore'},
@@ -152,11 +166,30 @@ export default function RegisterPage() {
             </div>
           )}
 
-          <div style={{textAlign:'center',marginTop:24,fontSize:13}}>
-            Hai già un account? <Link href="/auth/login" style={{color:'var(--acid)',fontWeight:600,textDecoration:'none'}}>Accedi</Link>
+              <div style={{textAlign:'center',marginTop:24,fontSize:13}}>
+                Hai già un account? <Link href="/auth/login" style={{color:'var(--acid)',fontWeight:600,textDecoration:'none'}}>Accedi</Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
+      <style>{`
+        @keyframes rise {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @media(max-width:880px){
+          div[style*="grid-template-columns:1.05fr"] {
+            grid-template-columns: 1fr !important;
+            gap: 36px !important;
+          }
+          div[style*="gridTemplateColumns:'1.05fr"] {
+            grid-template-columns: 1fr !important;
+            gap: 36px !important;
+          }
+        }
+      `}</style>
     </div>
   )
 }
