@@ -39,10 +39,9 @@ export default function ForgotPasswordPage() {
         <div style={{maxWidth:'1180px',margin:'0 auto',padding:'0 24px'}}>
           <div style={{display:'grid',gridTemplateColumns:'1.05fr .95fr',gap:'54px',alignItems:'flex-start'}}>
             {/* LEFT: Title */}
-            <div>
-              <h1 style={{fontFamily:'Anton',fontWeight:400,fontSize:'clamp(44px,7vw,86px)',lineHeight:0.92,letterSpacing:'-.01em',textTransform:'uppercase'}}>
-                <span style={{color:'var(--text)'}}>Recupera il tuo</span>
-                <br/>
+            <div style={{paddingRight:40}}>
+              <h1 style={{fontFamily:'Anton',fontWeight:400,fontSize:'clamp(44px,7vw,86px)',lineHeight:0.92,letterSpacing:'-.01em',textTransform:'uppercase',color:'var(--text)'}}>
+                Recupera il tuo<br/>
                 <span style={{color:'var(--acid)'}}>account</span>
               </h1>
               <p style={{marginTop:'22px',fontSize:'17px',color:'var(--muted)',maxWidth:'46ch',lineHeight:1.6}}>

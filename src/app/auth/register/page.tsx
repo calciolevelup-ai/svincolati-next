@@ -61,11 +61,11 @@ export default function RegisterPage() {
         <div style={{maxWidth:'1180px',margin:'0 auto',padding:'0 24px'}}>
           <div style={{display:'grid',gridTemplateColumns:'1.05fr .95fr',gap:'54px',alignItems:'flex-start'}}>
             {/* LEFT: Title */}
-            <div>
-              <h1 style={{fontFamily:'Anton',fontWeight:400,fontSize:'clamp(44px,7vw,86px)',lineHeight:0.92,letterSpacing:'-.01em',textTransform:'uppercase',transition:'.4s ease-in-out'}}>
-                <span style={{color:'var(--text)'}}>Il mercato {sport ? article + ' ' : ''}</span>
+            <div style={{paddingRight:40}}>
+              <h1 style={{fontFamily:'Anton',fontWeight:400,fontSize:'clamp(44px,7vw,86px)',lineHeight:0.92,letterSpacing:'-.01em',textTransform:'uppercase',transition:'.4s ease-in-out',color:'var(--text)'}}>
+                Il mercato {sport ? article + ' ' : ''}
                 {sport && <><span style={{color:currentSportColor,transition:'.4s ease-in-out'}}>{currentSport}</span><br/></>}
-                <span style={{color:'var(--acid)'}}>dilettantistico</span>
+                dilettantistico
               </h1>
               <p style={{marginTop:'22px',fontSize:'17px',color:'var(--muted)',maxWidth:'46ch',lineHeight:1.6}}>
                 Una community chiusa che mette in contatto giocatori svincolati e società. Niente bacheche pubbliche aperte a tutti: si entra solo con un codice invito.
