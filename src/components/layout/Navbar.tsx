@@ -2,6 +2,7 @@
 import Link from 'next/link'
 import { useAuth } from '@/hooks/useAuth'
 import Button from '@/components/ui/Button'
+import ThemeToggle from '@/components/ThemeToggle'
 import { scfg } from '@/lib/utils'
 
 const NAV_PLAYER = [
@@ -59,9 +60,12 @@ export default function Navbar() {
           ))}
         </div>
 
-        <Button onClick={logout}>
-          Esci
-        </Button>
+        <div style={{display:'flex',alignItems:'center',gap:'10px'}}>
+          <ThemeToggle />
+          <Button onClick={logout}>
+            Esci
+          </Button>
+        </div>
       </div>
     </nav>
   )
