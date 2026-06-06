@@ -38,18 +38,29 @@ export default function LoginPage() {
   }
 
   return (
-    <div style={{minHeight:'100vh',background:'var(--bg)',display:'flex',alignItems:'center',justifyContent:'center',padding:'20px'}}>
-      <div style={{maxWidth:420}}>
-        <div style={{textAlign:'center',marginBottom:48}}>
-          <div style={{fontSize:48,marginBottom:16}}>⚽</div>
-          <h1 style={{fontFamily:'Anton',fontSize:28,color:'var(--text)',letterSpacing:'.06em'}}>
-            SV<span style={{color:'var(--acid)'}}>INCOLA</span>TI
-          </h1>
-          <p style={{fontSize:13,color:'var(--muted)',marginTop:8}}>Il mercato del calcio dilettantistico</p>
-        </div>
+    <div style={{minHeight:'100vh',background:'var(--bg)',position:'relative'}}>
+      {/* Stripes background */}
+      <div style={{position:'absolute',right:'-60px',top:'-30px',width:'520px',height:'520px',zIndex:0,opacity:0.5,background:'repeating-linear-gradient(115deg, transparent 0 38px, rgba(65,194,133,.06) 38px 40px)',transform:'rotate(8deg)',pointerEvents:'none'}}></div>
 
-        <div style={{background:'var(--card)',border:'1px solid var(--line)',borderRadius:18,padding:30,marginBottom:24}}>
-          <h2 style={{fontSize:18,fontWeight:'bold',color:'var(--text)',marginBottom:24,textAlign:'center'}}>Accedi al tuo account</h2>
+      {/* Main content */}
+      <div style={{position:'relative',zIndex:3,padding:'48px 0 80px'}}>
+        <div style={{maxWidth:'1180px',margin:'0 auto',padding:'0 24px'}}>
+          <div style={{display:'grid',gridTemplateColumns:'1.05fr .95fr',gap:'54px',alignItems:'flex-start'}}>
+            {/* LEFT: Title */}
+            <div>
+              <h1 style={{fontFamily:'Anton',fontWeight:400,fontSize:'clamp(44px,7vw,86px)',lineHeight:0.92,letterSpacing:'-.01em',textTransform:'uppercase',transition:'.4s ease-in-out'}}>
+                <span style={{color:'var(--acid)'}}>Il mercato del</span>
+                <br/>
+                <span style={{color:'var(--acid)'}}>calcio dilettantistico</span>
+              </h1>
+              <p style={{marginTop:'22px',fontSize:'17px',color:'var(--muted)',maxWidth:'46ch',lineHeight:1.6}}>
+                Una community chiusa che mette in contatto giocatori svincolati e società. Niente bacheche pubbliche aperte a tutti: si entra solo con un codice invito.
+              </p>
+            </div>
+
+            {/* RIGHT: Form */}
+            <div style={{background:'var(--card)',border:'1px solid var(--line)',borderRadius:18,padding:30,animation:'rise .5s cubic-bezier(.2,.7,.2,1) both',width:'100%'}}>
+              <h2 style={{fontSize:18,fontWeight:'bold',color:'var(--text)',marginBottom:24,textAlign:'center'}}>Accedi al tuo account</h2>
 
           {error && (
             <div style={{background:'rgba(255, 90, 60, 0.15)',border:'1px solid rgba(255, 90, 60, 0.2)',color:'var(--danger)',padding:12,borderRadius:10,fontSize:13,marginBottom:16}}>
@@ -91,18 +102,37 @@ export default function LoginPage() {
             >
               {loading ? '⏳ Accesso...' : '✓ Accedi'}
             </button>
-          </form>
-        </div>
+              </form>
 
-        <div style={{textAlign:'center',display:'flex',flexDirection:'column',gap:12}}>
-          <Link href="/auth/register" style={{color:'var(--acid)',fontSize:13,fontWeight:600,textDecoration:'none',transition:'.16s'}}>
-            Non hai un account? Registrati
-          </Link>
-          <Link href="/auth/forgot-password" style={{color:'var(--muted)',fontSize:12,textDecoration:'none',transition:'.16s'}}>
-            Password dimenticata?
-          </Link>
+              <div style={{textAlign:'center',display:'flex',flexDirection:'column',gap:12,marginTop:24}}>
+                <Link href="/auth/register" style={{color:'var(--acid)',fontSize:13,fontWeight:600,textDecoration:'none',transition:'.16s'}}>
+                  Non hai un account? Registrati
+                </Link>
+                <Link href="/auth/forgot-password" style={{color:'var(--muted)',fontSize:12,textDecoration:'none',transition:'.16s'}}>
+                  Password dimenticata?
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+
+      <style>{`
+        @keyframes rise {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @media(max-width:880px){
+          div[style*="grid-template-columns:1.05fr"] {
+            grid-template-columns: 1fr !important;
+            gap: 36px !important;
+          }
+          div[style*="gridTemplateColumns:'1.05fr"] {
+            grid-template-columns: 1fr !important;
+            gap: 36px !important;
+          }
+        }
+      `}</style>
     </div>
   )
 }
