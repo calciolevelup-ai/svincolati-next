@@ -4,6 +4,7 @@ import { useSearchParams } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { scfg, initials } from '@/lib/utils'
 import Button from '@/components/ui/Button'
+import VerifiedBadge from '@/components/ui/VerifiedBadge'
 import { logActivity } from '@/lib/activity'
 import { useAuth } from '@/hooks/useAuth'
 
@@ -82,7 +83,10 @@ function PublicProfileContent() {
             {initials(player.nome)}
           </div>
           <div style={{flex:1}}>
-            <div style={{fontSize:20,fontWeight:'bold',color:'var(--text)'}}>{player.nome}</div>
+            <div style={{fontSize:20,fontWeight:'bold',color:'var(--text)',display:'flex',alignItems:'center',gap:8}}>
+              {player.nome}
+              <VerifiedBadge verified={player.verified} tessera={player.tessera} />
+            </div>
             <div style={{fontSize:14,color:'var(--muted)',marginTop:4}}>
               {player.ruolo} • {cfg.icon} {cfg.nome}
             </div>

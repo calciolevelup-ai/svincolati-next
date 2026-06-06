@@ -33,6 +33,17 @@
   --nav-bg: rgba(243,246,240,.82);
 }
 
+/* Sport Color Themes */
+[data-sport="pallavolo"] { --acid: #c084fc; --acid-dim: #a855f7; }
+[data-sport="rugby"] { --acid: #fbbf24; --acid-dim: #f59e0b; }
+[data-sport="calcio5"] { --acid: #38bdf8; --acid-dim: #0ea5e9; }
+[data-sport="basket"] { --acid: #ff8c00; --acid-dim: #ff6500; }
+
+[data-theme="light"][data-sport="pallavolo"] { --acid: #9333ea; --acid-dim: #7e22ce; }
+[data-theme="light"][data-sport="rugby"] { --acid: #d97706; --acid-dim: #b45309; }
+[data-theme="light"][data-sport="calcio5"] { --acid: #0284c7; --acid-dim: #0369a1; }
+[data-theme="light"][data-sport="basket"] { --acid: #e85d04; --acid-dim: #ae2012; }
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
@@ -357,4 +368,22 @@ label {
   background: var(--acid);
   border-color: var(--acid);
   color: #0b0d0a;
+}
+
+/* Verified Badge */
+.v-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'Spline Sans Mono';
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--blue);
+  background: rgba(76, 194, 255, 0.1);
+  border: 1px solid rgba(76, 194, 255, 0.25);
+  padding: 4px 9px;
+  border-radius: 6px;
+  font-weight: 600;
+  white-space: nowrap;
 }

@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import DashboardLayout from '@/components/layout/DashboardLayout'
 import Button from '@/components/ui/Button'
+import VerifiedBadge from '@/components/ui/VerifiedBadge'
 import { useAuth } from '@/hooks/useAuth'
 import { createClient } from '@/lib/supabase/client'
 import { getMatchingAds } from '@/lib/matching'
@@ -29,7 +30,7 @@ export default function PlayerTeamsPage() {
     try {
       const { data } = await supabase
         .from('ads')
-        .select('*')
+        .select(`*, club:profiles(id,nome,verified,tessera)`)
         .eq('sport', profile?.sport)
         .order('created_at', { ascending: false })
         .limit(100)
@@ -139,6 +140,10 @@ export default function PlayerTeamsPage() {
           <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill, minmax(320px, 1fr))',gap:18}}>
             {ads.map(ad => (
               <div key={ad.id} style={{background:'var(--card)',border:'1px solid var(--line)',borderRadius:14,padding:22,transition:'.2s',position:'relative',overflow:'hidden'}}>
+                <div style={{fontSize:12,color:'var(--muted)',marginBottom:8,display:'flex',alignItems:'center',gap:6}}>
+                  🏢 {ad.club?.nome || 'Società'}
+                  <VerifiedBadge verified={ad.club?.verified} tessera={ad.club?.tessera} />
+                </div>
                 <div style={{fontSize:16,fontWeight:'bold',color:'var(--text)',marginBottom:8}}>
                   {ad.ruolo}
                 </div>

@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import DashboardLayout from '@/components/layout/DashboardLayout'
 import Button from '@/components/ui/Button'
+import VerifiedBadge from '@/components/ui/VerifiedBadge'
 import { useAuth } from '@/hooks/useAuth'
 import { createClient } from '@/lib/supabase/client'
 import { scfg, initials, calcAge } from '@/lib/utils'
@@ -64,6 +65,7 @@ export default function SearchAdvancedPage() {
 
         if (nameSearch) query = query.ilike('nome', `%${nameSearch}%`)
         if (ruolo) query = query.eq('ruolo', ruolo)
+        if (piede) query = query.eq('piede', piede)
         if (regione) query = query.eq('regione', regione)
         if (provincia) query = query.ilike('provincia', `%${provincia}%`)
         if (catMin) {
@@ -272,7 +274,10 @@ export default function SearchAdvancedPage() {
                   {initials(p.nome)}
                 </div>
                 <div style={{flex:1}}>
-                  <div style={{fontSize:13,fontWeight:'bold',color:'var(--text)'}}>{p.nome}</div>
+                  <div style={{fontSize:13,fontWeight:'bold',color:'var(--text)',display:'flex',alignItems:'center',gap:6}}>
+                    {p.nome}
+                    <VerifiedBadge verified={p.verified} tessera={p.tessera} />
+                  </div>
                   <div style={{fontSize:11,color:'var(--muted)',marginTop:2}}>{p.ruolo} • {p.cat}</div>
                   <div style={{fontSize:10,color:'var(--muted-2)',marginTop:2}}>{p.eta && `${p.eta} anni`} {p.altezza && `• ${p.altezza}cm`}</div>
                 </div>

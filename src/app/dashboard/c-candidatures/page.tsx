@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import DashboardLayout from '@/components/layout/DashboardLayout'
 import Button from '@/components/ui/Button'
+import VerifiedBadge from '@/components/ui/VerifiedBadge'
 import { useAuth } from '@/hooks/useAuth'
 import { createClient } from '@/lib/supabase/client'
 import { initials } from '@/lib/utils'
@@ -137,7 +138,10 @@ export default function ClubCandidaturesPage() {
                         {initials(c.player?.nome)}
                       </div>
                       <div style={{flex:1}}>
-                        <div style={{fontSize:13,fontWeight:'bold',color:'var(--text)'}}>{c.player?.nome}</div>
+                        <div style={{fontSize:13,fontWeight:'bold',color:'var(--text)',display:'flex',alignItems:'center',gap:6}}>
+                          {c.player?.nome}
+                          <VerifiedBadge verified={c.player?.verified} tessera={c.player?.tessera} />
+                        </div>
                         <div style={{fontSize:11,color:'var(--muted)',marginTop:2}}>{c.player?.ruolo} • {c.player?.cat}</div>
                         <div style={{fontSize:10,color:'var(--muted-2)',marginTop:2}}>
                           Per annuncio: {c.ad?.ruolo} ({c.ad?.cat})

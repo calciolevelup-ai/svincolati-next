@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import DashboardLayout from '@/components/layout/DashboardLayout'
 import Button from '@/components/ui/Button'
+import VerifiedBadge from '@/components/ui/VerifiedBadge'
 import { useAuth } from '@/hooks/useAuth'
 import { createClient } from '@/lib/supabase/client'
 import { initials } from '@/lib/utils'
@@ -103,8 +104,9 @@ export default function FavoritesPage() {
                         {initials(target?.nome || target?.email || '')}
                       </div>
                       <div style={{ flex: 1 }}>
-                        <div style={{ fontSize: 13, fontWeight: 'bold', color: 'var(--text)' }}>
+                        <div style={{ fontSize: 13, fontWeight: 'bold', color: 'var(--text)', display: 'flex', alignItems: 'center', gap: 6 }}>
                           {target?.nome || target?.email?.split('@')[0]}
+                          {isPlayer && <VerifiedBadge verified={target?.verified} tessera={target?.tessera} />}
                         </div>
                         <div style={{ fontSize: 11, color: 'var(--muted)', marginTop: 2 }}>
                           {isPlayer ? `${target?.ruolo} • ${target?.cat}` : '🏢 Società'}
