@@ -1,10 +1,6 @@
-'use client'
 import Link from 'next/link'
-import { useState } from 'react'
 
 export default function NotFound() {
-  const [hovering, setHovering] = useState(false)
-
   return (
     <div style={{
       minHeight: '100vh',
@@ -61,12 +57,8 @@ export default function NotFound() {
           fontSize: 15,
           textDecoration: 'none',
           transition: '.18s',
-          cursor: 'pointer',
-          transform: hovering ? 'translateY(-2px)' : 'translateY(0)'
-        }}
-          onMouseEnter={() => setHovering(true)}
-          onMouseLeave={() => setHovering(false)}
-        >
+          cursor: 'pointer'
+        }}>
           🏠 Torna alla home
         </Link>
       </div>
