@@ -116,9 +116,9 @@ export default function LoginPage() {
               <button style={{flex:1,background:'var(--acid)',border:'none',color:'#0b0d0a',fontFamily:'Archivo',fontWeight:700,fontSize:14,padding:10,borderRadius:8,cursor:'pointer',transition:'.16s'}}>
                 Accedi
               </button>
-              <button style={{flex:1,background:'none',border:'none',color:'var(--muted)',fontFamily:'Archivo',fontWeight:700,fontSize:14,padding:10,borderRadius:8,cursor:'pointer',transition:'.16s'}}>
+              <Link href="/auth/register" style={{flex:1,background:'none',border:'none',color:'var(--muted)',fontFamily:'Archivo',fontWeight:700,fontSize:14,padding:10,borderRadius:8,cursor:'pointer',transition:'.16s',display:'grid',placeItems:'center',textDecoration:'none'}}>
                 Registrati con invito
-              </button>
+              </Link>
             </div>
 
             {/* Form */}
