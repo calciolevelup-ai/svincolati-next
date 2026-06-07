@@ -76,8 +76,13 @@ export default function PlayerCandidaturesPage() {
 
                 {/* Status */}
                 <div style={{display:'flex',alignItems:'center',gap:8}}>
-                  <div style={{fontFamily:'Spline Sans Mono',fontSize:'10.5px',letterSpacing:'.08em',textTransform:'uppercase',padding:'4px 9px',borderRadius:6,fontWeight:600,background:`rgba(${getStatusColor(cand.status) === 'var(--blue)' ? '76,194,255,.12)' : getStatusColor(cand.status) === 'var(--acid)' ? '65,194,133,.1)' : '255,90,60,.1)'}`,color:getStatusColor(cand.status),border:`1px solid rgba(${getStatusColor(cand.status) === 'var(--blue)' ? '76,194,255,.25)' : getStatusColor(cand.status) === 'var(--acid)' ? '65,194,133,.25)' : '255,90,60,.25)'}`)
-                  >
+                  <div style={{
+                    fontFamily:'Spline Sans Mono',fontSize:'10.5px',letterSpacing:'.08em',textTransform:'uppercase',
+                    padding:'4px 9px',borderRadius:6,fontWeight:600,
+                    background: cand.status === 'inviata' ? 'rgba(76,194,255,.12)' : cand.status === 'accettata' ? 'rgba(65,194,133,.1)' : 'rgba(255,90,60,.1)',
+                    color: getStatusColor(cand.status),
+                    border: cand.status === 'inviata' ? '1px solid rgba(76,194,255,.25)' : cand.status === 'accettata' ? '1px solid rgba(65,194,133,.25)' : '1px solid rgba(255,90,60,.25)'
+                  }}>
                     {getStatusLabel(cand.status)}
                   </div>
                   <div style={{fontFamily:'Spline Sans Mono',fontSize:11,color:'var(--muted-2)'}}>
